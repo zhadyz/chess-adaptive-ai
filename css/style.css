@@ -1,0 +1,458 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-card: #0f3460;
+    --accent: #e94560;
+    --accent-light: #ff6b6b;
+    --text-primary: #eee;
+    --text-secondary: #aaa;
+    --success: #4ecca3;
+    --warning: #ffc107;
+    --danger: #e94560;
+    --board-light: #f0d9b5;
+    --board-dark: #b58863;
+    --highlight: rgba(255, 255, 0, 0.4);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.elo-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.elo-label {
+    color: var(--text-secondary);
+}
+
+.elo-value {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.elo-change {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.elo-change.positive {
+    color: var(--success);
+}
+
+.elo-change.negative {
+    color: var(--danger);
+}
+
+/* Main Game Area */
+.game-area {
+    display: grid;
+    grid-template-columns: 250px 1fr 280px;
+    gap: 20px;
+    align-items: start;
+}
+
+/* Side Panels */
+.left-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Cards */
+.stats-card, .opening-card, .captured-card, .moves-card, .chart-card {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stats-card h3, .opening-card h3, .captured-card h3, .moves-card h3, .chart-card h3 {
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(233, 69, 96, 0.3);
+    padding-bottom: 8px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-row:last-child {
+    border-bottom: none;
+}
+
+.stat-row span:first-child {
+    color: var(--text-secondary);
+}
+
+/* Opening Card */
+#opening-name {
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.eco-code {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Captured Pieces */
+.captured-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.captured-label {
+    color: var(--text-secondary);
+    min-width: 50px;
+}
+
+.captured-pieces {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+}
+
+/* Board Container */
+.board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#board {
+    border-radius: 5px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.board-controls {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-light);
+}
+
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-primary);
+}
+
+.btn-danger {
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.btn-danger:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* Game Status */
+.game-status {
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-height: 25px;
+    color: var(--warning);
+}
+
+/* Move History */
+.move-history {
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+}
+
+.move-row {
+    display: grid;
+    grid-template-columns: 30px 1fr 1fr;
+    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.move-number {
+    color: var(--text-secondary);
+}
+
+.move {
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+.move:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.move.last-move {
+    background: rgba(233, 69, 96, 0.3);
+}
+
+.move.blunder {
+    color: var(--danger);
+}
+
+.move.mistake {
+    color: var(--warning);
+}
+
+.move.good {
+    color: var(--success);
+}
+
+/* Chart */
+.chart-card {
+    min-height: 200px;
+}
+
+#elo-chart {
+    max-height: 180px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 30px 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+
+.modal-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.modal-elo {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+}
+
+#modal-elo-change.positive {
+    color: var(--success);
+}
+
+#modal-elo-change.negative {
+    color: var(--danger);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.loading-overlay.hidden {
+    display: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--bg-card);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Highlight squares */
+.highlight-square {
+    box-shadow: inset 0 0 3px 3px var(--highlight);
+}
+
+/* Scrollbar */
+.move-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.move-history::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.move-history::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .game-area {
+        grid-template-columns: 200px 1fr 220px;
+    }
+}
+
+@media (max-width: 900px) {
+    .game-area {
+        grid-template-columns: 1fr;
+    }
+
+    .left-panel, .right-panel {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .left-panel > *, .right-panel > * {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 10px;
+    }
+
+    .board-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

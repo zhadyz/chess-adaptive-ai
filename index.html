@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess - Adaptive AI</title>
+    <link rel="stylesheet" href="lib/chessboard/chessboard.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chess vs Adaptive AI</h1>
+            <div class="elo-display">
+                <span class="elo-label">Your Elo:</span>
+                <span id="current-elo" class="elo-value">200</span>
+                <span id="elo-change" class="elo-change"></span>
+            </div>
+        </header>
+
+        <main class="game-area">
+            <aside class="left-panel">
+                <div class="stats-card">
+                    <h3>Statistics</h3>
+                    <div class="stat-row">
+                        <span>Games Played:</span>
+                        <span id="games-played">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Wins:</span>
+                        <span id="wins">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Losses:</span>
+                        <span id="losses">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Draws:</span>
+                        <span id="draws">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>Highest Elo:</span>
+                        <span id="highest-elo">200</span>
+                    </div>
+                    <div class="stat-row">
+                        <span>AI Skill Level:</span>
+                        <span id="ai-skill">0</span>
+                    </div>
+                </div>
+
+                <div class="opening-card">
+                    <h3>Opening</h3>
+                    <p id="opening-name">Starting Position</p>
+                    <p id="opening-eco" class="eco-code"></p>
+                </div>
+
+                <div class="captured-card">
+                    <h3>Captured Pieces</h3>
+                    <div class="captured-row">
+                        <span class="captured-label">White:</span>
+                        <span id="captured-white" class="captured-pieces"></span>
+                    </div>
+                    <div class="captured-row">
+                        <span class="captured-label">Black:</span>
+                        <span id="captured-black" class="captured-pieces"></span>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="board-container">
+                <div id="board" class="chess-board"></div>
+                <div class="board-controls">
+                    <button id="new-game-btn" class="btn btn-primary">New Game</button>
+                    <button id="resign-btn" class="btn btn-danger">Resign</button>
+                    <button id="flip-btn" class="btn btn-secondary">Flip Board</button>
+                </div>
+                <div id="game-status" class="game-status"></div>
+            </div>
+
+            <aside class="right-panel">
+                <div class="moves-card">
+                    <h3>Move History</h3>
+                    <div id="move-history" class="move-history"></div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Elo Progression</h3>
+                    <canvas id="elo-chart"></canvas>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Game Over</h2>
+            <p id="modal-message"></p>
+            <div class="modal-elo">
+                <span>Elo Change: </span>
+                <span id="modal-elo-change"></span>
+            </div>
+            <button id="modal-new-game" class="btn btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Loading Stockfish Engine...</p>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="lib/chessboard/chessboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="js/openings.js"></script>
+    <script src="js/elo.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
